@@ -1,0 +1,27 @@
+name = "synva-support"
+main = "src/index.js"
+compatibility_date = "2026-07-29"
+
+# ID подставится автоматически после `wrangler kv namespace create SUPPORT_KV`
+# — команда выведет строку вида id = "xxxxxxxx", скопируйте её сюда.
+kv_namespaces = [
+  { binding = "SUPPORT_KV", id = "ЗАМЕНИ_НА_ID_ИЗ_wrangler_kv_namespace_create" }
+]
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+SUPPORT_EMAIL = "sonreaaivpn@gmail.com"
+# Адрес отправителя. Пока домен не верифицирован в Resend, можно временно
+# использовать onboarding@resend.dev (см. SETUP.md) — но для боевого режима
+# лучше завести поддомен на securelinevpn.online и верифицировать его.
+FROM_EMAIL = "Synva Support <onboarding@resend.dev>"
+
+# Секреты НЕ хранятся в этом файле — задаются отдельно через:
+#   wrangler secret put CLIENT_KEY
+#   wrangler secret put RESEND_API_KEY
+#   wrangler secret put GMAIL_CLIENT_ID
+#   wrangler secret put GMAIL_CLIENT_SECRET
+#   wrangler secret put GMAIL_REFRESH_TOKEN
+# Подробности — в SETUP.md.
